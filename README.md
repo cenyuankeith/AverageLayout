@@ -1,6 +1,6 @@
 #AverageLayout
 
-![p1](https://github.com/cenyuankeith/TwoLineTextView/blob/master/image.png)
+![p1](https://github.com/cenyuankeith/AverageLayout/blob/master/image.png)
 
 #How to use ？
 ```XML
