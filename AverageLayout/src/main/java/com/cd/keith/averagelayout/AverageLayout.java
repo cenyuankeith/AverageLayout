@@ -60,8 +60,7 @@ public class AverageLayout extends ViewGroup {
             int left = (width - childWidth)/2;
             int top = (height - childHeight)/2;
             childView.layout(left, top, childWidth+left, childHeight+top);
-        }
-        if(childCount == 2){
+        } else if(childCount == 2){
             View childView1 = getChildAt(0);
             View childView2 = getChildAt(1);
 
@@ -70,24 +69,24 @@ public class AverageLayout extends ViewGroup {
 
             int topChildView2 = (height - childView2.getMeasuredHeight())/2;
             childView2.layout(width - childView2.getMeasuredWidth(), topChildView2, width ,childView2.getMeasuredHeight()+topChildView2);
-        }
-
-        int avgSpaceWidth, sumWidth = 0;
-        for(int i = 0;  i < childCount; i++){
-            View childView = getChildAt(i);
-            sumWidth += childView.getMeasuredWidth();
-        }
-        avgSpaceWidth = (width - sumWidth)/(childCount-1);
-        int currentWidth = 0;
-        for(int i = 0;  i < childCount; i++){
-            View childView = getChildAt(i);
-            int childViewTop = (height - childView.getMeasuredHeight())/2;
-            if(i == 0){
-                childView.layout(currentWidth, childViewTop, currentWidth + childView.getMeasuredWidth(), childView.getMeasuredHeight()+childViewTop);
-            }else{
-                childView.layout(currentWidth+avgSpaceWidth, childViewTop, currentWidth+avgSpaceWidth+childView.getMeasuredWidth() ,childView.getMeasuredHeight()+childViewTop);
+        }else {
+            int avgSpaceWidth, sumWidth = 0;
+            for(int i = 0;  i < childCount; i++){
+                View childView = getChildAt(i);
+                sumWidth += childView.getMeasuredWidth();
             }
-            currentWidth = childView.getRight();
+            avgSpaceWidth = (width - sumWidth)/(childCount-1);
+            int currentWidth = 0;
+            for(int i = 0;  i < childCount; i++){
+                View childView = getChildAt(i);
+                int childViewTop = (height - childView.getMeasuredHeight())/2;
+                if(i == 0){
+                    childView.layout(currentWidth, childViewTop, currentWidth + childView.getMeasuredWidth(), childView.getMeasuredHeight()+childViewTop);
+                }else{
+                    childView.layout(currentWidth+avgSpaceWidth, childViewTop, currentWidth+avgSpaceWidth+childView.getMeasuredWidth() ,childView.getMeasuredHeight()+childViewTop);
+                }
+                currentWidth = childView.getRight();
+            }
         }
     }
 }
